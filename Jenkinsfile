@@ -42,4 +42,21 @@ pipeline {
             }
         }
     }
+    post {
+    success {
+        emailext(
+            subject: "Build Successful",
+            body: "✅ Good News: Your build was successful.",
+            to: "rajeshmanik721211@gmail.com"
+        )
+    }
+
+    failure {
+        emailext(
+            subject: "Build Failed",
+            body: "🚫 Bad News: Build failed! Please check the logs.",
+            to: "rajeshmanik721211@gmail.com"
+        )
+    }
+}
 }
