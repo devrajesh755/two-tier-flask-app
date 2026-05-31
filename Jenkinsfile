@@ -9,6 +9,15 @@ pipeline {
                 echo "Cloning Source Code Completed"
             }
         }
+        stage(" Trivy File System Scan"){
+            steps{
+                echo "Performing File System Scan..."
+                sh "trivy fs ."
+                sh "trivy fs . -o result.json"
+                sh "cat result.json"
+                echo "File System Scanning Completed Successfully"
+            }
+        }
         stage("Build Process") {
             steps {
                 echo "Building..."
