@@ -1,12 +1,13 @@
+@Library(
 pipeline {
     agent {label 'dev'};
 
     stages {
         stage("Code Cloning") {
             steps {
-                echo "Cloning Source Code"
-                git url: "https://github.com/devrajesh755/two-tier-flask-app.git",branch: "main"
-                echo "Cloning Source Code Completed"
+            script{
+                clone("https://github.com/devrajesh755/two-tier-flask-app.git","main")
+                }
             }
         }
         stage(" Trivy File System Scan"){
