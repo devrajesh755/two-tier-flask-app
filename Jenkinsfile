@@ -20,7 +20,7 @@ pipeline {
         stage("Build Process") {
             steps {
                 script{
-                  Build Process()
+                  Build_Process()
                 }
             }
         }
