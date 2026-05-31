@@ -58,6 +58,7 @@ pipeline {
     failure {
         script{
             email_fail("rajeshmanik721211@gmail.com")
+        }
     }
 }
 }
