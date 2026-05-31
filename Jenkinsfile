@@ -43,7 +43,7 @@ pipeline {
         stage("Deployment Phase") {
             steps {
                 script{
-                    Deployment_Phase(flask-app) 
+                    Deployment_Phase("flask-app") 
                 }  
             }
         }
