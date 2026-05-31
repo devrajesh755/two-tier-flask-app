@@ -12,41 +12,39 @@ pipeline {
         }
         stage(" Trivy File System Scan"){
             steps{
-                echo "Performing File System Scan..."
-                sh "trivy fs . -o result.json"
-                echo "File System Scanning Completed Successfully"
+                script{
+                  trivy_fs()
+                }
             }
         }
         stage("Build Process") {
             steps {
-                echo "Building..."
-                sh "docker build -t two-tier-flask_app ."
-                echo "Building Completed..."
+                script{
+                  Build Process()
+                }
             }
         }
 
         stage("Testing Phase") {
             steps {
-                echo "Testing Code"
+                script{
+                     Testing_Phase()
+                }
             }
         }
         stage("Push To Docker Hub"){
             steps{
-                withCredentials([usernamePassword(
-                    credentialsId:"dockerHubCreds",
-                    passwordVariable:"dockerHubPass",
-                    usernameVariable:"dockerHubUser"
-                    )]){
-                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                    sh "docker image tag two-tier-flask_app ${env.dockerHubUser}/two-tier-flask_app"
-                    sh "docker push ${env.dockerHubUser}/two-tier-flask_app"
+                script{
+                    Push_DockerHub("dockerHubCreds","two-tier-flask-app")
                 }
             }
         }
 
         stage("Deployment Phase") {
             steps {
-                sh "docker compose up -d --build flask-app"
+                script{
+                    Deployment_Phase(flask-app) 
+                }  
             }
         }
     }
