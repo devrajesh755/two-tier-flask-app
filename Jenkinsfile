@@ -52,7 +52,7 @@ pipeline {
     post {
     success {
         emailext(
-            to: "rajeshmanik721211@gmail.com"
+            to: "rajeshmanik721211@gmail.com",
             subject: "Build Successful",
             body: "✅ Good News: Your build was successful.",
             attachmentsPattern: '**/result.json'
@@ -61,7 +61,7 @@ pipeline {
 
     failure {
         emailext(
-            to: "rajeshmanik721211@gmail.com"
+            to: "rajeshmanik721211@gmail.com",
             subject: "Build Failed",
             body: "🚫 Bad News: Build failed! Please check the logs.",
             attachmentsPattern: '**/result.json'
