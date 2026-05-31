@@ -55,7 +55,7 @@ pipeline {
         emailext(
             to: "rajeshmanik721211@gmail.com",
             subject: "Build Successful",
-            body: "✅ Good News: Your build was successful.",
+            body: "Good News: Your build was successful.",
             attachmentsPattern: '**/result.json'
         )
     }
