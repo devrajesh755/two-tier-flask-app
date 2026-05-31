@@ -12,9 +12,7 @@ pipeline {
         stage(" Trivy File System Scan"){
             steps{
                 echo "Performing File System Scan..."
-                sh "trivy fs ."
                 sh "trivy fs . -o result.json"
-                sh "cat result.json"
                 echo "File System Scanning Completed Successfully"
             }
         }
@@ -54,17 +52,19 @@ pipeline {
     post {
     success {
         emailext(
+            to: "rajeshmanik721211@gmail.com"
             subject: "Build Successful",
             body: "✅ Good News: Your build was successful.",
-            to: "rajeshmanik721211@gmail.com"
+            attachmentsPattern: '**/result.json'
         )
     }
 
     failure {
         emailext(
+            to: "rajeshmanik721211@gmail.com"
             subject: "Build Failed",
             body: "🚫 Bad News: Build failed! Please check the logs.",
-            to: "rajeshmanik721211@gmail.com"
+            attachmentsPattern: '**/result.json'
         )
     }
 }
