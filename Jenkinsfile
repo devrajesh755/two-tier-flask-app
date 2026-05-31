@@ -50,21 +50,14 @@ pipeline {
     }
     post {
     success {
-        emailext(
-            to: "rajeshmanik721211@gmail.com",
-            subject: "Build Successful",
-            body: "Good News: Your build was successful.",
-            attachmentsPattern: '**/result.json'
-        )
+       script {
+            email_succ("rajeshmanik721211@gmail.com")
+        }
     }
 
     failure {
-        emailext(
-            to: "rajeshmanik721211@gmail.com",
-            subject: "Build Failed",
-            body: "🚫 Bad News: Build failed! Please check the logs.",
-            attachmentsPattern: '**/result.json'
-        )
+        script{
+            email_fail("rajeshmanik721211@gmail.com")
     }
 }
 }
